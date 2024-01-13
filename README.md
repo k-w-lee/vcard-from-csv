@@ -12,20 +12,20 @@ This is a Python script that generates vCards based on a provided DataFrame and 
 1. Import the required libraries:
 
    ```python
-   import string
-   import os
+   ! pip install vcard-from-csv-morris
+
    import pandas as pd
+   from vcard_bulk_create.main import vcf_card_generate
+
+   df = pd.read_csv("yourfile.csv")
+
+   d = {"first_name": "Name", "phone": "Phone"}
+   vcf_card_generate(
+      df, d
+   )
    ```
 
-2. Copy the source code for the VCard Generator functions.
-
-3. Set the necessary constants and create a DataFrame with the contact information. The DataFrame should contain columns corresponding to the valid keys defined in the `VALID_KEYS` set:
-
-   ```python
-   df = pd.DataFrame(...)
-   ```
-
-4. Specify the column mappings as a dictionary. Each key in the dictionary should correspond to one of the valid keys, and the value should be the column name in the DataFrame that corresponds to that key. Ignore the key value pair if not available:
+3. Specify the column mappings as a dictionary. Each key in the dictionary should correspond to one of the valid keys, and the value should be the column name in the DataFrame that corresponds to that key. Ignore the key value pair if not available:
 
    ```python
    column_mappings = {
@@ -45,7 +45,7 @@ This is a Python script that generates vCards based on a provided DataFrame and 
 
    Note: Make sure that the column names in the dictionary match the column names in your DataFrame.
 
-5. Call the `vcf_card_generate` function, passing in the DataFrame, column mappings, and any optional parameters:
+4. Call the `vcf_card_generate` function, passing in the DataFrame, column mappings, and any optional parameters:
 
    ```python
    vcf_card_generate(df, column_mappings, prefix=None, path=None)

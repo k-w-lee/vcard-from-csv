@@ -197,6 +197,10 @@ def bulk_create_vcard(df2, path):
     """
 
     parsed_contacts = df2.to_dict(orient="records")
+
+    if not path:
+        path = "result.vcf"
+        
     if os.path.isdir(path):
         raise IsADirectoryError(
             f"{path} is a directory. Specify a valid file path ending with '.vcf'."
@@ -207,8 +211,7 @@ def bulk_create_vcard(df2, path):
             "The vCard file name must end with '.vcf'. Please provide a valid file path."
         )
 
-    if not path:
-        path = "result.vcf"
+
     with open(path, "w", encoding="utf-8") as vcf_file:
         for contact in parsed_contacts:
             vcard_dict = create_vcard(contact)
